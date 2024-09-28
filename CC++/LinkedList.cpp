@@ -71,11 +71,51 @@ void insertAtSpecificPos(Node *&head, int data, int pos)
     }
     if (cur == nullptr)
     {
-        cout << "Position out of range" << endl;
         return;
     }
     newNode->next = cur->next;
     cur->next = newNode;
+}
+
+void deleteAtHead(Node *&head)
+{
+    if (head == nullptr)
+    {
+        return;
+    }
+    head = head->next;
+}
+void deleteAtSpecificPos(Node *&head, int pos)
+{
+    if (pos < 0)
+    {
+        return;
+    }
+    int count = 0;
+    Node *cur = head;
+    while (cur != nullptr && count < pos - 1)
+    {
+        count++;
+        cur = cur->next;
+    }
+    if (cur == nullptr)
+    {
+        return;
+    }
+    cur->next = cur->next->next;
+}
+
+void deleteAtEnd(Node *&head){
+    if (head == nullptr)
+    {
+        return;
+    }
+    Node* cur = head;
+    while (cur->next != nullptr)
+    {
+        cur = cur->next;
+    }
+    cur = nullptr;
 }
 
 int main()
@@ -85,6 +125,8 @@ int main()
     insertAtHead(head, 10);
     traverseLinkedList(head);
     insertAtSpecificPos(head, 2, 1);
+    traverseLinkedList(head);
+    deleteAtSpecificPos(head,1);
     traverseLinkedList(head);
 
     return 0;
